@@ -23,19 +23,13 @@ pipeline {
             }
         }
         
-        stage('Mvn test') {
+        stage('Mvn test cases') {
             steps {
                 sh 'mvn test'
             }
         }
         
-        stage('Mvn package') {
-            steps {
-                sh 'mvn package'
-            }
-        }
-        
-        stage('Sonar-Analysis') {
+        stage('SonaQube-Analysis') {
             steps {
                withSonarQubeEnv('sonar-server') {
                    sh '''$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=petclinic \
@@ -46,5 +40,10 @@ pipeline {
             }
         }
     
+        stage('Mvn package') {
+                steps {
+                    sh 'mvn clean package'
+                }
+            }
     }
 }
