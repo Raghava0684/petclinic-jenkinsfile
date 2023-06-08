@@ -44,6 +44,12 @@ pipeline {
                 steps {
                     sh 'mvn clean package'
                 }
-            }
+        }
+        
+        stage('Deploy to Tomcat-Server') {
+                steps {
+                    sh 'sudo cp /root/.jenkins/workspace/Petclinic-Project/target/*.war  /opt/apache-tomcat-9.0.65/webapps/'
+                }
+        }
     }
 }
